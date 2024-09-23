@@ -1,0 +1,16 @@
+# You'll probably have to do xhost +"local:docker@" on the host first
+services:
+  pydev:
+    user: "${UID}:${GID}" 
+    image: bradmears/pydev:latest
+    hostname: pydev
+    build: .
+    environment:
+      - DISPLAY=${DISPLAY}
+      - USER=${USER}
+    volumes:
+      - ${HOME}:${HOME}
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - /etc/passwd:/etc/passwd:ro
+      - /etc/group:/etc/group:ro
+    network_mode: host
