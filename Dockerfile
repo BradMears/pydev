@@ -26,7 +26,7 @@ RUN pip3 install -U \
          Matplotlib \
          PyQt6
 
-# Create an aliases file somewhere that the user can conveniently source it
+# Create a bashrc file somewhere that the user can conveniently source it
 # but also where it doesn't interfere with the user's real .bashrc
 COPY bashrc /usr/local/home/
 
