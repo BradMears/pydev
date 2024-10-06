@@ -28,7 +28,7 @@ RUN pip3 install -U \
 
 # Create an aliases file somewhere that the user can conveniently source it
 # but also where it doesn't interfere with the user's real .bashrc
-COPY bash_aliases /usr/local/home/
+COPY bashrc /usr/local/home/
 
 # Override the default TERM type which is xterm. This might break something
 # so keep an eye on terminal behavior until this is proven solid.
