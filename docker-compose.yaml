@@ -1,10 +1,11 @@
 # You'll probably have to do xhost +"local:docker@" on the host first
 services:
   pydev:
-    user: "${UID}:${GID}" 
     image: bradmears/pydev:latest
-    hostname: pydev
     build: .
+    hostname: pydev
+    user: "${UID}:${GID}" 
+    working_dir: ${HOME}
     environment:
       - DISPLAY=${DISPLAY}
       - USER=${USER}
