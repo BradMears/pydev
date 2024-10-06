@@ -11,6 +11,12 @@ RUN apt update && \
         python3-setuptools \
         git
 
+# This variable won't take effect until pip 22.1 and Ubuntu 22.04 isn't 
+# there yet but I'll put this in and start using it in my Dockerfiles so
+# once the distro version of pip does get to that version, it will work.
+# ("work" means "suppress messages about running pip as root")
+ENV PIP_ROOT_USER_ACTION=ignore
+
 # You could load up and install every package known to mankind but then
 # you would have Anaconda. I try to keep it pared down to the ones that
 # I find most useful most of the time.
