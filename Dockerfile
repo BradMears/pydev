@@ -9,12 +9,12 @@ RUN apt update && \
         python3-pip \
         python3-pytest \
         python3-setuptools \
-        git
+        git \
+        vim
 
-# This variable won't take effect until pip 22.1 and Ubuntu 22.04 isn't 
-# there yet but I'll put this in and start using it in my Dockerfiles so
-# once the distro version of pip does get to that version, it will work.
-# ("work" means "suppress messages about running pip as root")
+# This variable is supposed to suppress messages about the dangers of 
+# running pip as root. It works on some versions of pip3 but not earlier 
+# ones. Worst case, it gets ignored and you still see the messages.
 ENV PIP_ROOT_USER_ACTION=ignore
 
 # You could load up and install every package known to mankind but then
