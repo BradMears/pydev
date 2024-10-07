@@ -1,11 +1,10 @@
 # bashrc stuff specific to this container
 
 # My real .bashrc goes to great lengths to set up the prompt based on a 
-# variety of factors. One thing it alwas does is include user@hostname.
-# In a container we will extend that to user@hostname@container. We'll
+# variety of factors. One thing it always does is include user@hostname.
+# In a container we will extend that to user@hostname-container. We'll
 # also change the color of that portion
-PS1=`echo $PS1 | sed -e s/32m/36m/ -e s/@/@\${REAL_HOST}:/`
-PS1="${PS1} "  # sed strips the trailing space so I'll put it back on
+PS1=`echo "$PS1" | sed -e s/32m/36m/ -e s/@/@\${REAL_HOST}\|/`
 
 # Aliases
 alias python=python3
