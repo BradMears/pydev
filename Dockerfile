@@ -7,7 +7,15 @@ RUN apt update && \
         python3-pytest \
         python3-setuptools \
         git \
-        vim
+        vim \
+        locales
+
+# I build my containers so that my environment matches what I use on my hosts. 
+# If you live in a different locale, you'll want to modify this.
+RUN locale-gen en_US.UTF-8  
+ENV LANG en_US.UTF-8  
+ENV LANGUAGE en_US:en  
+ENV LC_ALL en_US.UTF-8 
 
 # You could load up and install every package known to mankind but then
 # you would have Anaconda. I try to keep it pared down to the ones that
