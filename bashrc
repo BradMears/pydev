@@ -1,10 +1,13 @@
 # bashrc stuff specific to this container
 
-# My real .bashrc goes to great lengths to set up the prompt based on a 
-# variety of factors. One thing it always does is include user@hostname.
-# In a container we will extend that to user@hostname-container. We'll
-# also change the color of that portion
-PS1=`echo "$PS1" | sed -e s/32m/36m/ -e s/@/@\${REAL_HOST}\|/`
+# My real .bashrc goes to great lengths to set up a fancy prompt, which
+# includes the hostname. In a container, I want that hostname field to
+# show the container's hostname and the host's hostname. The variable
+# REAL_HOST must be passed into the container when you run it.
+if [ -z "${REAL_HOST}" ]; then
+    REAL_HOST="unknown"
+fi
+PS1=`echo "$PS1" | sed -e s/\\h/\\h@\${REAL_HOST}/`
 
 # Aliases
 alias python=python3
