@@ -24,7 +24,8 @@ RUN pip3 install -U \
          click \
          numpy \
          Matplotlib \
-         PyQt6
+         PyQt6 \
+         solidpython2
 
 # Create a bashrc file somewhere that the user can conveniently source it
 # but also where it doesn't interfere with the user's real .bashrc
