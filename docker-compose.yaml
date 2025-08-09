@@ -1,17 +1,21 @@
-# You'll probably have to do xhost +"local:docker@" on the host first
 services:
   pydev:
     image: bradmears/pydev:latest
     build: .
     hostname: pydev
+    privileged: true
     user: "${UID}:${GID}" 
     working_dir: ${HOME}
     environment:
       - DISPLAY=${DISPLAY}
       - USER=${USER}
+      - PULSE_SERVER=${PULSE_SERVER}
     volumes:
       - ${HOME}:${HOME}
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native 
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
+    devices:
+      - '/dev:/dev'
     network_mode: host

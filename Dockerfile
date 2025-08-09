@@ -1,4 +1,5 @@
-FROM ubuntu:22.04
+FROM python:3.11-bookworm
+#FROM ubuntu:22.04
 
 RUN apt update && \
     apt upgrade -y && \
@@ -9,6 +10,15 @@ RUN apt update && \
         git \
         vim \
         locales
+
+# All this just so I can install pyaudio with pip
+RUN apt update && \
+    apt install -y \
+    libasound-dev \
+    libportaudio2 \
+    libportaudiocpp0 \
+    portaudio19-dev \
+    pulseaudio
 
 # I build my containers so that my environment matches what I use on my hosts. 
 # If you live in a different locale, you'll want to modify this.
@@ -25,7 +35,8 @@ RUN pip3 install -U \
          numpy \
          Matplotlib \
          PyQt6 \
-         solidpython2
+         solidpython2 \
+         pyaudio
 
 # Create a bashrc file somewhere that the user can conveniently source it
 # but also where it doesn't interfere with the user's real .bashrc
