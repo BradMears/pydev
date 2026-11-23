@@ -1,6 +1,7 @@
 services:
   pydev:
     image: bradmears/pydev:latest
+    env_file: ".env"
     build: .
     hostname: pydev
     privileged: true
@@ -10,12 +11,17 @@ services:
       - DISPLAY=${DISPLAY}
       - USER=${USER}
       - PULSE_SERVER=${PULSE_SERVER}
+      #- LANGUAGE=${LANGUAGE}
+      #- LC_ALL=${LC_ALL}
+      #- REAL_HOST=${HOSTNAME}
     volumes:
       - ${HOME}:${HOME}
       - /tmp/.X11-unix:/tmp/.X11-unix
       - ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native 
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
+      - /home/brad2/suncam-cache:/pics
     devices:
       - '/dev:/dev'
     network_mode: host
+    

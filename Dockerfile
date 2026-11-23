@@ -1,5 +1,4 @@
-FROM python:3.11-bookworm
-#FROM ubuntu:22.04
+FROM python:3.14
 
 RUN apt update && \
     apt upgrade -y && \
@@ -23,21 +22,26 @@ RUN apt update && \
 # I build my containers so that my environment matches what I use on my hosts. 
 # If you live in a different locale, you'll want to modify this.
 RUN locale-gen en_US.UTF-8  
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
+ENV LANG=en_US.UTF-8  
+ENV LANGUAGE=en_US:en  
+ENV LC_ALL=en_US.UTF-8 
 
 # You could load up and install every package known to mankind but then
 # you would have Anaconda. I try to keep it pared down to the ones that
 # I find most useful most of the time.
 RUN pip3 install -U \
+         pytest \
          click \
          numpy \
          Matplotlib \
          PyQt6 \
+         jupyter \
          solidpython2 \
-         pyaudio
-
+         toml \
+         pyaudio \
+         skyfield \
+         pytz 
+         
 # Create a bashrc file somewhere that the user can conveniently source it
 # but also where it doesn't interfere with the user's real .bashrc
 COPY bashrc /usr/local/home/
